@@ -387,7 +387,7 @@ Copyright (c) 2016, Tetsuya Mori <t2y3141592@gmail.com>. All rights reserved.
                 sourceValue = Number(source);
                 value = Number(parsed[2]);
                 break;
-              case 'boolean':
+              case 'boolean': XliffConv.prototype.parseJSON
                 sourceValue = Boolean(source === 'true');
                 value = Boolean(parsed[2] === 'true');
                 break;
@@ -633,7 +633,7 @@ Copyright (c) 2016, Tetsuya Mori <t2y3141592@gmail.com>. All rights reserved.
         todos = targetBundle[component].meta.todo;
         todoMap = {};
         for (index = 0; index < todos.length; index++) {
-          todoMap[todos[index].path.replace(/[.]/g, '_$DOT$_').replace(/\//g, '.').substring(1)] = todos[index];
+          todoMap[todos[index].path.replace(/\//g, '.').substring(1)] = todos[index];
         }
         this._traverseBundle('', sourceBundle[component], targetBundle[component], function (id, source, target) {
           //console.log('_traverseBundle callback id = ' + component + '.' + id + ' source = ' + source + ' target = ' + target);
@@ -641,7 +641,7 @@ Copyright (c) 2016, Tetsuya Mori <t2y3141592@gmail.com>. All rights reserved.
           var transUnit = transUnitWrapper.getElementsByTagName('trans-unit')[0];
           var sourceTag = transUnit.getElementsByTagName('source')[0];
           var targetTag = transUnit.getElementsByTagName('target')[0];
-          var todo = todoMap[id];
+          var todo = todoMap[`${component}.${id}`];
           var op;
           var state = todo && this.xliffStates[todo.op] ? this.xliffStates[todo.op][0] : this.xliffStates.default[0];
           var restype = 'x-json-' + typeof source;
